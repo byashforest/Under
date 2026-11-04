@@ -63,9 +63,31 @@ let canvas = createCanvas(size, size, WEBGL);
   canvas.elt.addEventListener("pointerup", stopOrbit);
   canvas.elt.addEventListener("pointercancel", stopOrbit);
 
-  const enableButton = createButton("Wake me up");
+const enableButton = createButton("Wake me up");
   enableButton.parent("capture-button-area");
   enableButton.elt.addEventListener("click", enableMotion);
+
+const desktopMessage = document.getElementById("desktop-message");
+
+const isLikelyDesktop =
+  window.matchMedia("(pointer: fine)").matches &&
+  !window.matchMedia("(pointer: coarse)").matches;
+
+if (isLikelyDesktop) {
+  enableButton.hide();
+  desktopMessage.hidden = false;
+
+  document.querySelector(".introduction .description").hidden = true;
+
+  new QRCode(document.getElementById("desktop-qr"), {
+    text: "https://under.inkandbone.world",
+    width: 144,
+    height: 144,
+    colorDark: "#0f0f0e",
+    colorLight: "#e8e3d8",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
 
   startButton = createButton("Go on, then");
   startButton.parent("capture-button-area");
