@@ -367,7 +367,8 @@ function startCapture() {
     stopCapture();
     return;
   }
-
+  
+  document.querySelector(".introduction .description").hidden = true;
   document.getElementById("trim-toggle").hidden = true;
   document.getElementById("trim-controls").hidden = true;
   document.getElementById("gesture-area").style.display = "none";
